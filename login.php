@@ -2,6 +2,9 @@
 require "includes/header.php";
 require "config.php";
 
+if (isset($_SESSION['username'])) {
+  header('location: index.php');
+}
 
 if (isset($_POST['submit'])) {
   if ($_POST['email'] == '') {
@@ -20,7 +23,10 @@ if (isset($_POST['submit'])) {
 
     if ($login->rowCount() > 0) {
       if (password_verify($password, $data["passwd"])) {
-        echo "Welcome back <b>" . $data['username'] . "</b>";
+        $_SESSION["email"] = $data["email"];
+        $_SESSION["username"] = $data["username"];
+
+        header("location: index.php");
       }
     } else {
       echo "The email is not registered.";

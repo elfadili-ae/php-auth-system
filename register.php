@@ -3,6 +3,11 @@ require "includes/header.php";
 
 require "config.php";
 
+if (isset($_SESSION['username'])) {
+  header('location: index.php');
+}
+
+
 $isError = false;
 $err_message = "";
 if (isset($_POST["submit"])) {

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -33,21 +37,23 @@
 
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="register.php">Register</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Username
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Logout</a></li>
-
+          <?php if (!isset($_SESSION['username'])): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="register.php">Register</a>
+            </li>
+          <?php else: ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php echo $_SESSION['username'] ?>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+              <?php endif; ?>
             </ul>
           </li>
 
